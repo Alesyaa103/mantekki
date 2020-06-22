@@ -1,0 +1,30 @@
+@import './variables';
+
+@mixin link {
+  font-family: $fontMain;
+  text-transform: uppercase;
+  color: $content;
+  font-size: 12px;
+  letter-spacing: -0.8px;
+  word-spacing: -0.8px;
+  text-decoration: none;
+}
+
+@mixin text {
+  font-family: $fontMain;
+  text-transform: uppercase;
+  color: $content;
+  letter-spacing: -0.8px;
+  word-spacing: -0.8px;
+  text-decoration: none;
+}
+
+@mixin boldText {
+  font-family: $fontMain;
+  text-transform: uppercase;
+  color: $content;
+  letter-spacing: -0.8px;
+  word-spacing: -0.8px;
+  text-decoration: none;
+  font-weight: bold;
+}

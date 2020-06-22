@@ -1,0 +1,18 @@
+@import '../../styles/mixins';
+
+.footer {
+  display: flex;
+  border-top: 1px solid $content;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 40px 100px;
+  &__link {
+    @include link;
+    font-size: 10px;
+  }
+  &__title {
+    @include boldText;
+    margin: 10px 0;
+    font-size: 11px;
+  }
+}

@@ -1,0 +1,30 @@
+@import '../../styles/_mixins';
+
+.header {
+  border-bottom: 1px solid $content;
+  border-top: 1px solid $content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  padding: 0 100px 0 300px;
+  position: fixed;
+  background-color: $fond;
+  width: 100%;
+}
+
+.logo {
+  margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  &__item {
+    @include link;
+    padding: 0 20px 0 20px;
+    &__search {
+      margin-right: -15px;
+    }
+  }
+}
