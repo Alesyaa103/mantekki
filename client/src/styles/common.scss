@@ -9,3 +9,13 @@ body {
   padding: 0;
   background-color: $fond;
 }
+
+#root, main {
+  height: 100vh;
+  width: 100vw;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}

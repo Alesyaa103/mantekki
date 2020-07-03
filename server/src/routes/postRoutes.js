@@ -3,7 +3,7 @@ const postControl = require('../controllers/postControl');
 const imageMiddleware = require('../middlewares/imageMiddleware');
 
 router
-  .post('/', imageMiddleware, (req, res, next) => postControl.create(req.body, req.file, req.user)
+  .post('/', imageMiddleware, (req, res, next) => postControl.create(req.body, req.user, req.file)
     .then(data => res.send(data))
     .catch(next))
   .get('/all', (req, res, next) => postControl.getAll()
@@ -12,7 +12,7 @@ router
   .get('/collection/:collection', (req, res, next) => postControl.getCollection(req.params)
     .then(data => res.send(data))
     .catch(next))
-  .put('/:id', imageMiddleware, (req, res, next) => postControl.update(req.params, req.file, req.body, req.user)
+  .put('/:id', imageMiddleware, (req, res, next) => postControl.update(req.params, req.body, req.user, req.file)
     .then(data => res.send(data))
     .catch(next))
   .delete('/:id', (req, res, next) => postControl.remove(req.params, req.user)

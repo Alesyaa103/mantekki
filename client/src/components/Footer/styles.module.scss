@@ -1,6 +1,7 @@
 @import '../../styles/mixins';
 
 .footer {
+  height: 150px;
   display: flex;
   border-top: 1px solid $content;
   justify-content: space-between;
