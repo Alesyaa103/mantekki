@@ -1,7 +1,8 @@
 import {
   POSTS_SUCCESS,
   CHANGE_POST,
-  DELETE_POST
+  DELETE_POST,
+  ADD_POST
 } from '../actions/types';
 
 const initialState = {
@@ -51,11 +52,18 @@ export default (state = initialState, action) => {
       }
     case DELETE_POST:
       const collection = payload.collect;
-      const modifiedState = state[collection].filter(item => item._id !== payload._id);
+      const modifiedCollection = state[collection].filter(item => item._id !== payload._id);
       return {
         ...state,
-        [collection]: modifiedState
+        [collection]: modifiedCollection
       };
+    case ADD_POST:
+      const postCollection = payload.collect;
+      const newCollection = [...state[postCollection], payload];
+      return {
+        ...state,
+        [postCollection]: newCollection
+      }
     default:
       return state
   }

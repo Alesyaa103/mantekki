@@ -1,0 +1,69 @@
+@import '../../styles/mixins';
+
+.section {
+  padding-top: 40px;
+}
+
+.wraper {
+  border-bottom: 1px solid $content;
+  display: flex;
+}
+
+.title {
+  @include boldText;
+  font-size: 25px;
+  margin: 10px 100px;
+}
+
+.mainContent {
+  width: 35%;
+  &__image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.addContent {
+  width: 30%;
+  border-right: 1px solid $content;
+  border-left: 1px solid $content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(90deg, transparent 50%, $content 50%, transparent 51%);
+  background-repeat: no-repeat;
+}
+
+.itemContent {
+  padding: 0 60px 0 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.delivery {
+  @include boldText;
+  font-size: 13px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  &__text {
+    border-bottom: 1px solid $content;
+    padding: 15px 0 7px;
+    display: block;
+    background-color: $fond;
+    &__middle {
+      background-color: $fond;
+      border-bottom: 1px solid $content;
+      padding: 15px 0 7px;
+      display: flex;
+      flex-direction: column;
+      margin: 0 20px;
+    }
+  }
+}

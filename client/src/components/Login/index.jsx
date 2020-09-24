@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 import { Button, TextField, Typography} from '@material-ui/core';
 import styles from './styles.module.scss';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector } from 'react-redux';
 import {login} from '../../actions/userAction';
 
 const Login = () => {
   let history = useHistory()
   const dispatch = useDispatch();
+  const { isAdmin } = useSelector(state => state.user);
+
   const [formData, setFormData] = useState({
     username: '',
     password: ''
   });
+
+  useEffect(() => {
+    isAdmin && history.push("/admin")
+  }, [isAdmin]);
+
   const changeHandler = (e) => {
     setFormData({
       ...formData,
@@ -21,7 +28,6 @@ const Login = () => {
   const submitForm = (e) => {
     e.preventDefault();
     dispatch(login(formData));
-    history.push("/admin")
   };
   return (
     <form noValidate onSubmit={submitForm}>

@@ -6,12 +6,20 @@ import {updateMainContent} from '../../actions/mainContentAction';
 import {updatePost, createPost, deletePost} from '../../actions/postAction';
 
 const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
-  const [formData, setFormData] = useState(item);
+  const [formData, setFormData] = useState({
+    image: '',
+    title: '',
+    collect: '',
+    purpose: ''
+  });
   const [uploadUrl, setUploadUrl] = useState(null);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    setFormData(item);
+    setFormData({
+      ...formData,
+      ...item
+    });
+    setUploadUrl(null);
   },[item]);
 
   const changeHandler = (e) => {
@@ -56,7 +64,7 @@ const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
         {uploadUrl ? (
           <img src={uploadUrl} className={styles.block__image} alt=""/>
           ) : (
-            <img src={`http://localhost:8080/image/${formData.image}`} className={styles.block__image} alt=""/>
+            formData.image && <img src={`http://localhost:8080/image/${formData.image}`} className={styles.block__image} alt=""/>
           )
         }
         <Button variant="contained" color="primary" component="span" className={styles.block__button}>

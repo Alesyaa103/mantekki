@@ -10,7 +10,6 @@ const authorizationMiddleware = require('./middlewares/authorizationMiddleware')
 const routesWhiteList = require('./config/routesWhiteListConfig');
 const cors = require('cors');
 require('./config/passportConfig');
-require('./helpers/removeUnusedImg');
 
 const app = express();
 app.use(cors())

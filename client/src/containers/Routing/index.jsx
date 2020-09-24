@@ -1,15 +1,16 @@
 import React from 'react';
 import { Switch, Redirect, Route } from 'react-router-dom';
-import MainPage from '../MainPage';
+import MainPage from '../../components/MainPage';
 import Auth from '../Auth';
-import Admin from '../Admin';
+import Admin from '../../components/Admin';
+import PrivateRoute from '../PrivatRoute';
 
 const Routing = () => {
   return (
     <Switch>
-      <Route exact path="/login" component={Auth}/>
       <Route exact path="/" component={MainPage}/>
-      <Route exact path="/admin" component={Admin}/>
+      <Route exact path="/login" component={Auth}/>
+      <PrivateRoute exact path="/admin" component={Admin}/>
       <Redirect to="/" />
     </Switch>
   );
