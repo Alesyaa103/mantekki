@@ -16,8 +16,6 @@ const MainPage = () => {
           <img src="https://media.vogue.co.uk/photos/5ee395abe400ca1697b1781f/2:3/w_1920%2cc_limit/Skincare%20Layering%20Colier%20Schorr.jpg" alt="Main" className={styles.mainContent__image}/>
         </div>
         <div className={styles.addContent}>
-          {/* <h3 className={styles.addContent__text}>Delivery terms depend on recipient's destination (country).</h3>
-          <h3 className={styles.addContent__text}>If you have any questions, please contact us: info@exaple.com</h3> */}
           <ul className={[styles.addContent__text, styles.delivery].join(' ')}>
             <li><span className={styles.delivery__text}>Order</span></li>
             <li className={styles.delivery__text__middle}><span>Packing</span><span> 1-14 days</span></li>

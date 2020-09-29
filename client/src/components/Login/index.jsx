@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { Redirect } from "react-router-dom";
 import { Button, TextField, Typography} from '@material-ui/core';
 import styles from './styles.module.scss';
 import {useDispatch, useSelector } from 'react-redux';
 import {login} from '../../actions/userAction';
 
 const Login = () => {
-  let history = useHistory()
   const dispatch = useDispatch();
   const { isAdmin } = useSelector(state => state.user);
 
@@ -14,10 +13,6 @@ const Login = () => {
     username: '',
     password: ''
   });
-
-  useEffect(() => {
-    isAdmin && history.push("/admin")
-  }, [isAdmin]);
 
   const changeHandler = (e) => {
     setFormData({
@@ -30,6 +25,8 @@ const Login = () => {
     dispatch(login(formData));
   };
   return (
+    <>
+    {isAdmin ? <Redirect to="/admin" /> : (
     <form noValidate onSubmit={submitForm}>
       <Typography component="h1" className={styles.title} variant="h5">
         Sign in
@@ -68,7 +65,8 @@ const Login = () => {
       >
         Sign In
       </Button>
-    </form>
+    </form>)}
+    </>
   )
 }
 

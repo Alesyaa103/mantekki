@@ -12,7 +12,12 @@ const env = {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     claster: process.env.DB_CLASTER
-  }
+  },
+  aws: {
+    awsId: process.env.ACCESS_KEY_ID,
+    awsSecret: process.env.SECRET_ACCESS_KEY,
+    awsBucket: process.env.BUCKET_NAME
+  },
 };
 
 module.exports = env;

@@ -1,6 +1,7 @@
 import React from 'react';
 import Logo from '../Logo';
 import styles from './styles.module.scss';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -15,7 +16,7 @@ const Header = () => {
         <li>
           <a href='###' className={styles.controls__item}>Search</a>
         </li>
-        <li><a href='###' className={styles.controls__item}>Login</a></li>
+        <li><Link to='/login' className={styles.controls__item}>Login</Link></li>
       </ul>
     </header>
   );

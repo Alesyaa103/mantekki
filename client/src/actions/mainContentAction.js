@@ -9,7 +9,7 @@ export const getMainContent = () => async dispatch => {
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/head/getAll`, {headers});
     dispatch({type: MAIN_CONTENT_SUCCESS, payload: res.data});
   } catch (error) {
-    dispatch({type: MAIN_CONTENT_FAIL, error})
+    dispatch({type: MAIN_CONTENT_FAIL, error: error.message})
   }
 };
 
@@ -29,6 +29,6 @@ export const updateMainContent = (data) => async dispatch => {
     const res =  await axios.put(`${process.env.REACT_APP_SERVER_URL}/api/head/${data._id}`, newData, {headers})
     dispatch({type: CHANGE_MAIN_CONTENT, payload: res.data});
   } catch (error) {
-    dispatch({type: MAIN_CONTENT_FAIL, error})
+    dispatch({type: MAIN_CONTENT_FAIL, error: error.message})
   }
 }

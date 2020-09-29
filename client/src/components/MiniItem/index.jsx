@@ -7,7 +7,7 @@ const MiniItem = ({items, handleChangeEdit}) => {
       {items.map(item => {
         return <div className={styles.item} key={item._id}>
           {item.image ? (
-            <img src={`http://localhost:8080/image/${item.image}`} className={styles.item__image} alt=""/>
+            <img src={item.image} className={styles.item__image} alt=""/>
           ) : (
             <div className={styles.item__default}></div>
           )}

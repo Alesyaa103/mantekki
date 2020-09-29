@@ -6,6 +6,7 @@ import {updateMainContent} from '../../actions/mainContentAction';
 import {updatePost, createPost, deletePost} from '../../actions/postAction';
 
 const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     image: '',
     title: '',
@@ -13,13 +14,14 @@ const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
     purpose: ''
   });
   const [uploadUrl, setUploadUrl] = useState(null);
-  const dispatch = useDispatch();
+  
   useEffect(() => {
     setFormData({
       ...formData,
       ...item
     });
     setUploadUrl(null);
+    //eslint-disable-next-line
   },[item]);
 
   const changeHandler = (e) => {
@@ -64,7 +66,7 @@ const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
         {uploadUrl ? (
           <img src={uploadUrl} className={styles.block__image} alt=""/>
           ) : (
-            formData.image && <img src={`http://localhost:8080/image/${formData.image}`} className={styles.block__image} alt=""/>
+            formData.image && <img src={formData.image} className={styles.block__image} alt=""/>
           )
         }
         <Button variant="contained" color="primary" component="span" className={styles.block__button}>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect }  from 'react';
+import { Redirect } from "react-router-dom";
 import styles from './styles.module.scss';
 import { MenuItem, Select, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
@@ -9,13 +10,11 @@ import ItemEdit from '../ItemEdit';
 
 const Admin = () => {
   const dispatch = useDispatch();
-  const {posts, mainContent } = useSelector(state => {
-    const { posts, mainContent: { mainContent } } = state;
-    return {
-      posts,
-      mainContent
-    }
-  });
+  const {posts, mainContent, isAdmin } = useSelector(state => ({
+      posts: state.posts,
+      mainContent: state.mainContent.mainContent,
+      isAdmin: state.user.isAdmin
+    }));
 
   const [formData, setFormData] = useState({
     content: '',
@@ -47,7 +46,7 @@ const Admin = () => {
   useEffect(()=>{
     dispatch(getAllPosts());
     dispatch(getMainContent());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (formData.collection) {
@@ -59,6 +58,8 @@ const Admin = () => {
   }, [formData, posts, mainContent]);
 
   return(
+    <>
+    {isAdmin ? (
     <section className={styles.container}>
       <aside className={styles.aside}>
         <Select id="content" value={formData.content} name="content" onChange={changeHandler} className={styles.aside__item}>
@@ -89,7 +90,8 @@ const Admin = () => {
         {editPost && <ItemEdit editPost={editPost} isNew={false} clearEdit={clearEdit}/>}
         {createPost && <ItemEdit editPost={{image: '', title: '', collect: ''}} isNew={true} clearEdit={clearEdit}/>}
       </article>
-    </section>
+    </section>) : <Redirect to="/login" />}
+    </>
   )
 
 }

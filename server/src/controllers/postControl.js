@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const uploadS3 = require('../helpers/awsUploadHelper');
 
 const create = async (data, {isAdmin}, file) => {
   if (!isAdmin) {
@@ -7,8 +8,13 @@ const create = async (data, {isAdmin}, file) => {
   if (!file) {
     throw new Error('Couldn\'t load the file')
   }
-  const path = file.path.slice(12);
-  return await Post.create(new Post({image: path, ...data}));
+  const timestamp = +new Date();
+  const name = `${data.title}_${timestamp}`;
+  const image = await uploadS3(file, name);
+    if (!image) {
+      throw new Error('Could not load image');
+    }
+  return await Post.create(new Post({image, ...data}));
 };
 
 const getAll = async () => {
@@ -24,8 +30,13 @@ const update = async ({id}, data, {isAdmin}, file) => {
     throw new Error('You are not allowed to make changes');
   }
   if (file) {
-    const path = file.path.slice(12);
-    data = {image: path, ...data};
+    const timestamp = +new Date();
+		const name = `${data.title}_${timestamp}`;
+    const avatar = await uploadS3(file, name);
+			if (!avatar) {
+				throw new Error('Could not load image');
+			}
+    data = {image: avatar, ...data};
   }
   await Post.findByIdAndUpdate(id, data);
   return await Post.findById(id);
