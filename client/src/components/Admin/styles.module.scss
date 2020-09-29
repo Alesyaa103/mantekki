@@ -22,3 +22,30 @@
     display: block !important;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 60px 20px;
+    height: calc(100% - 150px);
+    max-height: 100vh;
+  }
+  .aside,
+  .editBlock {
+    min-width: 50%;
+  }
+  .aside {
+    padding-right: 20px;
+    &__item {
+      font-size: 14px !important;
+    }
+  }
+  .editBlock {
+    margin-left: 0 !important;
+    overflow-y: auto;
+    padding-right: 10px;
+
+    &__addnewButton {
+      font-size: 11px !important;
+    }
+  }
+}

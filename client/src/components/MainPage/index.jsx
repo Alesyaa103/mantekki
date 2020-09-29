@@ -1,35 +1,69 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import Item from '../Item';
-import items from '../../data';
 import styles from './styles.module.scss';
+import { getRecentPosts } from '../../actions/postAction';
+import { getMainContent } from '../../actions/mainContentAction';
 
 const MainPage = () => {
-  const elements = []
-  for (let i=0; i<6;i++){
-    const {id, ...itemProps} = items[i];
-    elements.push(<Item {...itemProps}  key={id} />);
-  }
+  const dispatch = useDispatch();
+
+  const {recent, mainContent } = useSelector(state => ({
+    recent: state.posts.recent,
+    mainContent: state.mainContent.mainContent,
+  }));
+
+  const [main, setMain] = useState({
+    left: '',
+    right: ''
+  })
+
+  useEffect(()=>{
+    dispatch(getRecentPosts());
+    dispatch(getMainContent());
+  }, [dispatch]);
+
+  useEffect(()=>{
+    console.log(mainContent)
+    const left = (mainContent ?? []).find(item => item.purpose === 'left');
+    const right = (mainContent ?? []).find(item => item.purpose === 'right');
+    setMain({left, right});
+  }, [mainContent]);
+
+
   return (
     <section className={styles.section}>
+      {mainContent && (
       <article className={styles.wraper}>
+        {main.left && (
         <div className={styles.mainContent}>
-          <img src="https://media.vogue.co.uk/photos/5ee395abe400ca1697b1781f/2:3/w_1920%2cc_limit/Skincare%20Layering%20Colier%20Schorr.jpg" alt="Main" className={styles.mainContent__image}/>
-        </div>
+          <img src={main.left.image} alt="Main" className={styles.mainContent__image}/>
+        </div>)
+        }
         <div className={styles.addContent}>
           <ul className={[styles.addContent__text, styles.delivery].join(' ')}>
-            <li><span className={styles.delivery__text}>Order</span></li>
+            <li className={styles.delivery__text}><span>Order</span></li>
             <li className={styles.delivery__text__middle}><span>Packing</span><span> 1-14 days</span></li>
-            <li><span className={styles.delivery__text}>delivery</span></li>
+            <li className={styles.delivery__text}><span>delivery</span></li>
           </ul>
         </div>
+        {main.right && (
         <div className={styles.mainContent}>
-          <img src="https://media.vogue.co.uk/photos/5ee395abe400ca1697b1781f/2:3/w_1920%2cc_limit/Skincare%20Layering%20Colier%20Schorr.jpg" alt="Main" className={styles.mainContent__image}/>
-        </div>
-      </article>
+          <img src={main.right.image} alt="Main" className={styles.mainContent__image}/>
+        </div>)
+        }
+      </article>)
+      }
+      { recent && (
       <article>
         <h2 className={styles.title}>Special offers</h2>
-        <div className={styles.itemContent}>{elements}</div>
-      </article>
+        <div className={styles.itemContent}>
+          {
+            recent.map(item => <Item key={item._id} name={item.title} image={item.image}/>)
+          }
+        </div>
+      </article>)
+      }
     </section>
   )
 }

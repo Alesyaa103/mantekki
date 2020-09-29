@@ -4,4 +4,10 @@
   font-family: $fontMain;
   font-weight: bold;
   letter-spacing: -0.9px;
+  margin: 20px 0;
+
+  & a {
+    text-decoration: none;
+    color: black;
+  }
 }

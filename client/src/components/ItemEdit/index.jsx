@@ -11,7 +11,8 @@ const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
     image: '',
     title: '',
     collect: '',
-    purpose: ''
+    purpose: '',
+    main: false
   });
   const [uploadUrl, setUploadUrl] = useState(null);
   
@@ -77,11 +78,8 @@ const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
       <div className={styles.container__block}>
         {item.purpose ? (
           <Select className={styles.block__item} id="purpose" required value={formData.purpose} name="purpose" onChange={changeHandler}>
-            <MenuItem value="1">1</MenuItem>
-            <MenuItem value="2">2</MenuItem>
-            <MenuItem value="3">3</MenuItem>
-            <MenuItem value="4">4</MenuItem>
-            <MenuItem value="5">5</MenuItem>
+            <MenuItem value="left">Left</MenuItem>
+            <MenuItem value="right">Right</MenuItem>
           </Select>
         ): (
           <Select className={styles.block__item} required id="collect" value={formData.collect} name="collect" onChange={changeHandler}>
@@ -103,15 +101,19 @@ const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
           value={formData.title}
           onChange={changeHandler}
           autoFocus />
+        <Select className={styles.block__item} id="show" required value={formData.main ?? false} name="main" onChange={changeHandler}>
+          <MenuItem value="true">Yes</MenuItem>
+          <MenuItem value="false">No</MenuItem>
+        </Select>
         <div className={styles.buttonWrapper}>
-          <Button type="submit" variant="contained" color="primary">
+          <Button className={styles.button} type="submit" variant="contained" color="primary">
             Save
           </Button>
-          <Button type="button" variant="contained" color="primary" onClick={clearEdit}>
+          <Button className={styles.button} type="button" variant="contained" color="primary" onClick={clearEdit}>
             Cancel
           </Button>
           {item.collect && (
-            <Button type="button" variant="contained" color="secondary" onClick={deleteItem}>
+            <Button className={styles.button} type="button" variant="contained" color="secondary" onClick={deleteItem}>
               Delete
             </Button>
           )}

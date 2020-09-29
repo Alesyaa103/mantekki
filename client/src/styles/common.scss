@@ -10,12 +10,25 @@ body {
   background-color: $fond;
 }
 
-#root, main {
+#root,
+main {
   height: 100vh;
   width: 100vw;
+  overflow-x: hidden;
 }
 
 main {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 768px) {
+  .MuiOutlinedInput-input {
+    padding: 5px !important;
+  }
+
+  .MuiInputLabel-formControl {
+    top: -13px;
+    left: -8px;
+  }
 }

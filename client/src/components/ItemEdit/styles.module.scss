@@ -37,5 +37,22 @@
 
 .buttonWrapper {
   display: flex;
+  margin-top: 10px;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &__block {
+      width: 100%;
+    }
+  }
+
+  .button {
+    margin-bottom: 10px !important;
+  }
 }

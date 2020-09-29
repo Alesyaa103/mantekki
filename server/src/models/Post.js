@@ -13,6 +13,10 @@ const PostSchema = new Post({
   collect: {
     type: String,
     required: true
+  },
+  main: {
+    type: Boolean,
+    required: false
   }
 }, {
   timestamps: true,

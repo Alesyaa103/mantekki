@@ -2,7 +2,8 @@ import {
   POSTS_SUCCESS,
   CHANGE_POST,
   DELETE_POST,
-  ADD_POST
+  ADD_POST,
+  RECENT_SUCCESS
 } from '../actions/types';
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   digitalArt: null,
   prints: null,
   canvasPainting: null,
-  watercolor: null
+  watercolor: null,
+  recent: null
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +27,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         ...newState
+      }
+    case RECENT_SUCCESS:
+      return {
+        ...state,
+        recent: payload
       }
     case CHANGE_POST:
       const {prevCollection, ...rest} = payload;
