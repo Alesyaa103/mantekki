@@ -1,14 +1,43 @@
 import axios from 'axios';
-import {POSTS_SUCCESS, ADD_POST, CHANGE_POST, DELETE_POST, POST_FAIL} from '../actions/types';
+import {POSTS_SUCCESS, ADD_POST, CHANGE_POST, DELETE_POST, POST_FAIL, RECENT_SUCCESS, COLLECTION_SUCCESS, START_LOADING_POST} from '../actions/types';
 import { NotificationManager } from 'react-notifications';
 
 export const getAllPosts = () => async dispatch => {
   try {
+    dispatch({type: START_LOADING_POST});
     const headers = {};
     headers['Content-Type'] = 'application/json';
     headers.Accept = 'application/json';
     const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/post/all`, {headers});
     dispatch({type: POSTS_SUCCESS, payload: res.data});
+  } catch (error) {
+    dispatch({type: POST_FAIL, error: error.message});
+    NotificationManager.error('Something went wrong', 'Error', 4000);
+  }
+}
+
+export const getCollection = (collection) => async dispatch => {
+  try {
+    dispatch({type: START_LOADING_POST});
+    const headers = {};
+    headers['Content-Type'] = 'application/json';
+    headers.Accept = 'application/json';
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/post/collection/${collection}`, {headers});
+    dispatch({type: COLLECTION_SUCCESS, payload: {data: res.data, collection}});
+  } catch (error) {
+    dispatch({type: POST_FAIL, error: error.message});
+    NotificationManager.error('Something went wrong', 'Error', 4000);
+  }
+}
+
+export const getRecentPosts = () => async dispatch => {
+  try {
+    dispatch({type: START_LOADING_POST});
+    const headers = {};
+    headers['Content-Type'] = 'application/json';
+    headers.Accept = 'application/json';
+    const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/post/recent`, {headers});
+    dispatch({type: RECENT_SUCCESS, payload: res.data});
   } catch (error) {
     dispatch({type: POST_FAIL, error: error.message});
     NotificationManager.error('Something went wrong', 'Error', 4000);

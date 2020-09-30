@@ -1,0 +1,35 @@
+@import '../../styles/_mixins';
+
+.wrapper {
+  padding-top: 62px;
+  display: flex;
+}
+
+.textBlock {
+  width: 30%;
+  padding: 20px 40px;
+}
+
+.text {
+  word-break: break-word;
+  @include link;
+  text-transform: none;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.posts {
+  width: 70%;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    padding-top: 100px;
+    flex-direction: column;
+  }
+
+  .textBlock,
+  .posts {
+    width: 100%;
+  }
+}

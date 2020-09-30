@@ -21,6 +21,15 @@ const getAll = async () => {
   return await Post.find();
 }
 
+const getRecent = async () => {
+  const posts =  await Post.find();
+  const recentPosts = posts.filter(item => item.main).sort(({ updatedAt: firstDate = '' }, { updatedAt: secondDate = '' }) => {
+    return Number(new Date(secondDate)) - Number(new Date(firstDate));
+  })
+  .slice(0, 6);
+  return recentPosts;
+}
+
 const getCollection = async ({collection}) => {
   return await Post.find({collect: collection});
 }
@@ -51,4 +60,4 @@ const remove = async ({id}, { isAdmin }) => {
   return deletedPost;
 }
 
-module.exports = {remove, update, create, getCollection, getAll};
+module.exports = {remove, update, create, getCollection, getAll, getRecent};

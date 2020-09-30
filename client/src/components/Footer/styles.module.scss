@@ -5,15 +5,23 @@
   display: flex;
   border-top: 1px solid $content;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 40px 100px;
+  align-items: baseline;
+  padding: 30px 100px;
   &__link {
     @include link;
     font-size: 10px;
   }
   &__title {
     @include boldText;
-    margin: 10px 0;
+    margin: 20px 0;
     font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .footer {
+    padding: 10px 40px;
+    flex-direction: column;
+    height: auto;
   }
 }

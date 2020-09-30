@@ -6,25 +6,80 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 40px;
-  padding: 0 100px 0 300px;
+  height: 62px;
   position: fixed;
   background-color: $fond;
   width: 100%;
+  z-index: 2;
 }
 
 .logo {
-  margin: 0 auto;
+  margin: 0;
+  margin-left: 100px;
+  margin-right: 150px;
 }
 
-.controls {
+.controlBlock {
   display: flex;
   align-items: center;
+  margin-right: 100px;
+  margin-left: 150px;
+  justify-content: space-between;
+}
+.control {
+  @include link;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  width: inherit;
+  justify-content: space-between;
   &__item {
     @include link;
-    padding: 0 20px 0 20px;
-    &__search {
-      margin-right: -15px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .nav {
+    &__item {
+      font-size: 10px;
     }
+  }
+
+  .controlBlock {
+    margin-left: 40px;
+    margin-right: 20px;
+    margin-top: 4px;
+  }
+
+  .control {
+    font-size: 10px;
+  }
+
+  .logo {
+    margin-right: 40px;
+    margin-left: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .controlBlock {
+    margin-right: 40px;
+  }
+
+  .logo {
+    margin-left: 40px;
+  }
+
+  .nav {
+    display: block;
+    width: fit-content;
+  }
+
+  .header {
+    height: 100px;
   }
 }
