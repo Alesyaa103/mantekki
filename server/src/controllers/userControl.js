@@ -21,3 +21,8 @@ exports.register = async ({isAdmin, password, username}) => {
   return {isAdmin: user.isAdmin, 
           username: user.username}
 };
+
+exports.sendLogged = ( {isAdmin }) => {
+  console.log(isAdmin, 'jhflyi')
+  return {isAdmin};
+}

@@ -15,7 +15,6 @@ export default (state = initialState, action) => {
         message: error
       }
     case LOGIN_FAIL:
-      localStorage.setItem('token', '');
       return {
         ...state,
         message: error

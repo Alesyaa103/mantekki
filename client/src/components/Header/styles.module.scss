@@ -10,47 +10,63 @@
   position: fixed;
   background-color: $fond;
   width: 100%;
+  z-index: 2;
 }
 
 .logo {
   margin: 0;
   margin-left: 100px;
+  margin-right: 150px;
 }
 
-.controls {
+.controlBlock {
   display: flex;
   align-items: center;
   margin-right: 100px;
-  &__item {
-    @include link;
-    margin: 0 20px;
-    &__search {
-      margin-right: -15px;
-    }
-  }
+  margin-left: 150px;
+  justify-content: space-between;
+}
+.control {
+  @include link;
+  margin-left: 10px;
+  cursor: pointer;
 }
 
 .nav {
   display: flex;
   align-items: center;
+  width: inherit;
+  justify-content: space-between;
   &__item {
     @include link;
-    padding: 0 20px 0 20px;
   }
 }
 
 @media screen and (max-width: 1200px) {
   .nav {
-    display: block;
+    &__item {
+      font-size: 10px;
+    }
   }
 
-  .header {
-    height: 100px;
+  .controlBlock {
+    margin-left: 40px;
+    margin-right: 20px;
+    margin-top: 4px;
+  }
+
+  .control {
+    font-size: 10px;
+  }
+
+  .logo {
+    margin-right: 40px;
+    margin-left: 20px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .controls {
+  .controlBlock {
     margin-right: 40px;
   }
 
@@ -60,5 +76,10 @@
 
   .nav {
     display: block;
+    width: fit-content;
+  }
+
+  .header {
+    height: 100px;
   }
 }

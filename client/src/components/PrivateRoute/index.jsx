@@ -6,14 +6,15 @@ import jwt from "jsonwebtoken";
 
 const PrivateRoute = ({ component: Component, isAdmin, ...rest }) => {
   const token = localStorage.getItem("token");
-return(
-  <Route
-    {...rest}
-    render={props => (jwt.decode(token)
-      ? <Component {...props} />
-      : <Redirect to='/' />)}
-  />
-);}
+  return(
+    <Route
+      {...rest}
+      render={props => (jwt.decode(token)
+        ? <Component {...props} />
+        : <Redirect to='/' />)}
+    />
+  );
+}
 
 
 PrivateRoute.propTypes = {

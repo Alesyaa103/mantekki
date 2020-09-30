@@ -1,8 +1,9 @@
 import axios from 'axios';
-import {MAIN_CONTENT_SUCCESS, CHANGE_MAIN_CONTENT, MAIN_CONTENT_FAIL} from '../actions/types';
+import {MAIN_CONTENT_SUCCESS, CHANGE_MAIN_CONTENT, MAIN_CONTENT_FAIL, START_LOADING_MAIN} from '../actions/types';
 
 export const getMainContent = () => async dispatch => {
   try {
+    dispatch({type: START_LOADING_MAIN});
     const headers = {};
     headers['Content-Type'] = 'application/json';
     headers.Accept = 'application/json';

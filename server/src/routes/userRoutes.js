@@ -9,6 +9,9 @@ router
     .catch(next))
   .post('/register', registrationMiddleware ,(req, res, next) => userControl.register(req.user)
     .then(data => res.send(data))
-    .catch(next));
-
+    .catch(next))
+  .get('/auth', (req, res, next) => {
+    const data = userControl.sendLogged(req.user);
+    res.send(data)
+  });
 module.exports = router;

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Item from '../Item';
+import Item from '../../components/Item';
 import styles from './styles.module.scss';
 import { getRecentPosts } from '../../actions/postAction';
 import { getMainContent } from '../../actions/mainContentAction';
+import Spinner from '../../components/Spinner';
 
 const MainPage = () => {
   const dispatch = useDispatch();
 
-  const {recent, mainContent } = useSelector(state => ({
+  const {recent, mainContent, loading } = useSelector(state => ({
     recent: state.posts.recent,
     mainContent: state.mainContent.mainContent,
+    loading: state.posts.loading || state.mainContent.loading
   }));
 
   const [main, setMain] = useState({
@@ -19,12 +21,12 @@ const MainPage = () => {
   })
 
   useEffect(()=>{
-    dispatch(getRecentPosts());
-    dispatch(getMainContent());
+    (!recent || ( recent && !Boolean(recent.length))) && dispatch(getRecentPosts());
+    !mainContent && dispatch(getMainContent());
+    //eslint-disable-next-line
   }, [dispatch]);
 
   useEffect(()=>{
-    console.log(mainContent)
     const left = (mainContent ?? []).find(item => item.purpose === 'left');
     const right = (mainContent ?? []).find(item => item.purpose === 'right');
     setMain({left, right});
@@ -32,6 +34,8 @@ const MainPage = () => {
 
 
   return (
+    <>
+    {loading ? <Spinner /> : (
     <section className={styles.section}>
       {mainContent && (
       <article className={styles.wraper}>
@@ -59,12 +63,13 @@ const MainPage = () => {
         <h2 className={styles.title}>Special offers</h2>
         <div className={styles.itemContent}>
           {
-            recent.map(item => <Item key={item._id} name={item.title} image={item.image}/>)
+            recent.map(item => <Item key={item._id} name={item.title} image={item.image} collect={item.collect}/>)
           }
         </div>
       </article>)
       }
-    </section>
+    </section>)}
+    </>
   )
 }
 

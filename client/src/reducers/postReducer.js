@@ -3,7 +3,9 @@ import {
   CHANGE_POST,
   DELETE_POST,
   ADD_POST,
-  RECENT_SUCCESS
+  RECENT_SUCCESS,
+  COLLECTION_SUCCESS,
+  START_LOADING_POST
 } from '../actions/types';
 
 const initialState = {
@@ -19,6 +21,11 @@ const initialState = {
 export default (state = initialState, action) => {
   const {type, payload} = action;
   switch (type) {
+    case START_LOADING_POST:
+      return {
+        ...state,
+        loading: true
+      }
     case POSTS_SUCCESS:
       let newState = initialState;
       for (let key in newState) {
@@ -26,12 +33,21 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
-        ...newState
+        ...newState,
+        loading: false
       }
     case RECENT_SUCCESS:
       return {
         ...state,
-        recent: payload
+        recent: payload,
+        loading: false
+      }
+    case COLLECTION_SUCCESS:
+      const { data, collection: currentCollection } = payload;
+      return {
+        ...state,
+        [currentCollection]: data,
+        loading: false
       }
     case CHANGE_POST:
       const {prevCollection, ...rest} = payload;

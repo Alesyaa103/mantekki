@@ -1,4 +1,4 @@
-import {MAIN_CONTENT_SUCCESS, CHANGE_MAIN_CONTENT} from '../actions/types';
+import {MAIN_CONTENT_SUCCESS, CHANGE_MAIN_CONTENT, START_LOADING_MAIN} from '../actions/types';
 
 const initialState = {
   loading: true,
@@ -8,10 +8,16 @@ const initialState = {
 export default (state = initialState, action) => {
   const {type, payload} = action;
   switch (type) {
+    case START_LOADING_MAIN:
+      return {
+        ...state,
+        loading: true
+      }
     case MAIN_CONTENT_SUCCESS:
       return {
         ...state,
-        mainContent: payload
+        mainContent: payload,
+        loading: false
       }
     case CHANGE_MAIN_CONTENT:
       const changedContent = state.mainContent.map(item => {

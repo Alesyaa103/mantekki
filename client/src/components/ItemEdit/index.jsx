@@ -101,10 +101,11 @@ const ItemEdit = ({editPost: item, clearEdit, isNew}) => {
           value={formData.title}
           onChange={changeHandler}
           autoFocus />
+        {!item.purpose && (
         <Select className={styles.block__item} id="show" required value={formData.main ?? false} name="main" onChange={changeHandler}>
           <MenuItem value="true">Yes</MenuItem>
           <MenuItem value="false">No</MenuItem>
-        </Select>
+        </Select>)}
         <div className={styles.buttonWrapper}>
           <Button className={styles.button} type="submit" variant="contained" color="primary">
             Save
